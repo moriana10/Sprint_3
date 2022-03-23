@@ -1,0 +1,28 @@
+
+
+body {
+    font-family: Montserrat;
+}
+#errorPassword, #errorName, #errorPhone, 
+#errorLastName, #errorMail, #errorAddress {
+    display: none;
+}
+.invalid {
+    color: red;
+    font-weight: bolder;
+    font-size: 18px;
+    border: solid 3px red;
+}
+.invalid-feedback {
+    font-size: 16px;
+    font-weight: bolder;
+    color: red;
+}
+.valid {
+    border: solid 3px green;
+    color: black;
+    font-weight: bolder;
+}
+input {
+    outline: none;
+}
