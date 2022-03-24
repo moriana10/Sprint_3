@@ -73,18 +73,19 @@ let total = 0;
 // Exercise 1
 // 1. Hem de recòrrer l'array products per agafar el producte per la seva id
 // 2. Quan la trobem afegim el producte a l'array cartList
-function buy(id) {
+/*function buy(id) {
     for (let product of products) {
         if (product.id === id) {
             cartList.push(product);
         }       
     }  
-}
-
+}*/
 // Exercise 2
-//  la funció cleanCart() reinicialitza la variable cartList.
+//  la funció cleanCart() reinicialitza la variable cartList, cart i total
 function cleanCart() {
     cartList = [];
+    cart = [];
+    total = 0;
 }
 
 // Exercise 3
@@ -101,7 +102,7 @@ function calculateTotal() {
 // Exercise 4
 // Using the "cartlist" array that contains all the items in the shopping cart, 
 // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-function generateCart(cartList) {
+/*function generateCart(cartList) {
     cart = [];
     for (let product of cartList) {
         let repeated = false;
@@ -119,7 +120,7 @@ function generateCart(cartList) {
         }
     }
     return cart;
-}
+}*/
 
 // Exercise 5
 // Apply promotions to each item in the array "cart". Les id que tenen descompte son 1(el preu baixa a 10) i 3(2/3 de descompte)
@@ -139,17 +140,50 @@ function applyPromotionsCart(cart) {
 // ** Nivell II **
 
 // Exercise 7
-function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
-}
+    function addToCart(id) {
+        for (let product of products) {
+            if (product.id === id) {
+                let found = false;
+                for (let productCart of cart) {
+                    if (productCart.id === product.id) {
+                        found = true;
+                        productCart.quantity++;
+                        product.subtotal = product.quantity * product.price;
+                        break;
+                    }
+                }
+                if (found === false) {
+                    product.quantity = 1;
+                    cart.push(product);
+                    product.subtotal = product.quantity * product.price;
+                }
+            }
+        }
+        applyPromotionsCart(cart);
+        return cart;
+    }
 
 // Exercise 8
-function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
-}
+    function removeFromCart(id) {
+        for (let product of cart) {
+            if (product.id === id) {
+                if (product.quantity > 1) {
+                    product.quantity--;
+                    product.subtotal = product.quantity * product.price;
+                } else {
+                    cart.splice(cart.indexOf(product), 1);
+                    // Ajuda: Tingues en compte que has de validar si el producte ja existeix a l'array cart, 
+                    // per actualitzar la seva quantitat, o afegir-lo en cas que encara no formi part d'aquest array cart
+                }
+                applyPromotionsCart(cart);
+            }
+        }
+    }
 
 // Exercise 9
 function printCart() {

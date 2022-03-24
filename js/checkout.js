@@ -88,7 +88,7 @@ let validate = (e) => {
 inputs.forEach((input) =>{
 	input.addEventListener("blur",validate);
 })
-formulario.addEventListener ("submit", (e) => {
+formulario.addEventListener("submit", (e) => {
 	e.preventDefault();
 });
 
